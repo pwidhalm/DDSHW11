@@ -1,0 +1,37 @@
+---
+title: "r11"
+author: "Paul Widhalm"
+date: "November 24, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r }
+library(fpp)
+
+data("ukcars")
+
+fitd<-decompose(ukcars)
+fitdseas<-seasadj(fitd)
+ucar<-ts(c(ukcars[1:54]),ukcars[119]+400,ukcars[120:121]),start=c(1996,1),frequency=12)
+
+
+
+```
+
+## Plots
+
+
+```{r pressure, echo=FALSE}
+plot(ukcars)
+plot(fitd)
+plot(fitdseas)
+plot(ucar)
+plot(ukcars, col="gray", main-"Electricsal equipment manufacturing",ylab="new orders index", xlab="") lines(fit$time.series[,2],col="red",ylab="Trend")
+
+
+```
