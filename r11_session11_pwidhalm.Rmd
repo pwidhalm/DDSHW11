@@ -1,7 +1,7 @@
 ---
-title: "r11"
+title: "HW11"
 author: "Paul Widhalm"
-date: "November 24, 2016"
+date: "November 25, 2016"
 output: html_document
 ---
 
@@ -9,29 +9,76 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r cars}
+  library(fpp)
+  data("ukcars")
+  fitd<-decompose(ukcars)
+  fitdseas<-seasadj(fitd)
+  ucarTS1<-ts(c(ukcars[1:54],ukcars[119],ukcars[120:121]),start=c(1996,1),frequency=12)
+  ucarTS2<-ts(c(ukcars[1:54],ukcars[119]+500,ukcars[120:121]),start=c(1996,1),frequency=12)
+  ucarTS3<-ts(c(ukcars[1:54],ukcars[1]+500,ukcars[120:121]),start=c(1996,1),frequency=12)
+  fit<-stl(ukcars,s.window = 5)
+  
+```
 
-```{r }
-library(fpp)
 
-data("ukcars")
+## Data Plots
+## UK Cars, there was a trough in the 1980s but a steady increase since then
 
-fitd<-decompose(ukcars)
-fitdseas<-seasadj(fitd)
-ucar<-ts(c(ukcars[1:54]),ukcars[119]+400,ukcars[120:121]),start=c(1996,1),frequency=12)
-
-
+```{r1, echo=FALSE}
+  plot(ukcars)
 
 ```
 
-## Plots
+
+## Decomposition
+## This chart affirms was is shown in the previous chart
+
+```{r2, echo=FALSE}
+  plot(fitd)
+
+```
 
 
-```{r pressure, echo=FALSE}
-plot(ukcars)
-plot(fitd)
-plot(fitdseas)
-plot(ucar)
-plot(ukcars, col="gray", main-"Electricsal equipment manufacturing",ylab="new orders index", xlab="") lines(fit$time.series[,2],col="red",ylab="Trend")
+
+## Seasonally Adjusted
+
+```{r3, echo=FALSE}
+  plot(fitdseas)
+
+```
+
+
+## Time Series, no Adjustments
+
+```{r4, echo=FALSE}
+  plot(ucarTS1)
+
+```
+
+
+## Time Series, Adjusted in the middle
+
+```{r5, echo=FALSE}
+  plot(ucarTS2)
+
+```
+
+
+## Time Series, Adjusted at the end
+## where the outliuer is does make a difference
+
+```{r50, echo=FALSE}
+  plot(ucarTS3)
+
+```
+
+
+
+## Seasonal and Trend Decomposition
+
+```{r6, echo=FALSE}
+  plot(fit)
 
 
 ```
